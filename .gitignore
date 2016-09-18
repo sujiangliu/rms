@@ -1,0 +1,25 @@
+.settings/
+target/
+.project
+.classpath
+.mymetadata
+.idea/
+*.iml
+rebel.xml
+*.pdb
+*/test
+.Ds_Store
+out/
+
+WebRoot/WEB-INF/classes/*
+src/main/webapp/WEB-INF/*
+*.class
+
+*.class
+
+# Package Files #
+#*.jar
+*.war
+*.ear
+WebRoot/wechatApp/css/style.css
+.gitignore
