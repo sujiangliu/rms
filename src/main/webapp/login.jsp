@@ -14,7 +14,7 @@
     <script src="${baseURL}/common/js/login.js"></script>
 </head>
 <body>
-
+	<input id="baseURL" type="hidden" value="${baseURL }" />
     <div class="container">
         <form class="loginForm" method="post">
           <h1>登陆</h1>

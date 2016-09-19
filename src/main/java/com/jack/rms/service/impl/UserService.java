@@ -19,6 +19,11 @@ public class UserService implements IUserService {
 		return user;
 	}
 	
+	public User getUserByUsername(String username) {
+		User user = userMapper.selectByUsername(username);
+		return user;
+	}
+	
 	public int saveUser(User user) {
 		
 		if (null == userMapper) {

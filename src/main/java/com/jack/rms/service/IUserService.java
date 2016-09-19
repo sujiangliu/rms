@@ -7,6 +7,8 @@ public interface IUserService {
 
 	public User getUserById(String id);
 	
+	public User getUserByUsername(String username);
+	
 	public int saveUser(User user);
 	
 	public UserMapper getUserMapper();
