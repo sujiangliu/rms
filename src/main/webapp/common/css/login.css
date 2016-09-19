@@ -1,0 +1,255 @@
+/* 通用样式 */
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* 背景图片 */
+body {
+	background:#7f9b4e url(../img/logo_bg.jpg) no-repeat center top;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	background-size:cover;
+}
+
+/* 登陆表单 */
+.loginForm {
+    width: 300px;
+    margin: 120px auto 30px;
+    padding: 10px;
+    position: relative;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: white;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.3);
+}
+
+/* 表单样式 */
+.loginForm h1 {
+    font-size: 22px;
+    padding-bottom: 20px;
+}
+
+.loginForm input[type=text],
+.loginForm input[type=password] {
+    width: 100%;
+    padding: 8px 4px 8px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #4e3043;
+    border: 1px solid rgba(78,48,67, 0.8);
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+    box-shadow: 
+        0 1px 0 rgba(255,255,255,0.2), 
+        inset 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
+}
+
+.loginForm input::-webkit-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.loginForm input:-moz-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.loginForm input:-ms-input-placeholder {
+    color: rgba(37,21,26,0.5);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.loginForm input[type=text]:hover,
+.loginForm input[type=password]:hover {
+    border-color: #333;
+}
+
+/*文本框聚焦后，改变边框背景*/
+.loginForm input[type=text]:focus,
+.loginForm input[type=password]:focus,
+.loginForm input[type=submit]:focus {
+    box-shadow: 
+        0 1px 0 rgba(255,255,255,0.5), 
+        inset 0 1px 1px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(255,255,255,0.15);
+    outline: none;
+}
+
+.no-boxshadow .loginForm input[type=text]:focus,
+.no-boxshadow .loginForm input[type=password]:focus {
+    outline: 1px solid white;
+}
+
+.loginForm input[type=submit] {
+    width: 100%;
+    padding: 8px 5px;
+    background: #634056;
+    background: -moz-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -ms-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -o-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(99,64,86,0.5)), to(rgba(76,49,65,0.7)));
+    background: -webkit-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));    
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.loginForm input[type=submit]:hover {
+    box-shadow: 
+        inset 0 1px rgba(255,255,255,0.2), 
+        inset 0 20px 30px rgba(99,64,86,0.5);
+}
+
+.loginForm label {
+    display: none;
+    padding: 0 0 5px 2px;
+    cursor: pointer;
+}
+
+.loginForm label:hover ~ input {
+    border-color: #333;
+}
+
+/* 弹框提示 */
+.ui-ios-overlay{
+	z-index:99999;
+	position:fixed;
+	_position:absolute;
+	top:50%;
+	left:50%;
+	width:280px;
+	height:100px;
+	margin-left:-140px;
+	margin-top:-70px;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000,endColorstr=#cc000000);
+	background:rgba(0,0,0,0.8);
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border-radius:20px;
+}
+.ui-ios-overlay .title{
+	color:#FFF;
+	font-weight:bold;
+	text-align:center;
+	display:block;
+	font-size:20px;
+	position:absolute;
+	bottom:10px;
+	left:0;
+	width:100%;
+}
+.ui-ios-overlay img{
+	width:50px;
+	height:50px;
+	display:block;
+	margin:10px auto 0 auto;
+}
+.ui-ios-overlay .spinner{
+	left:50% !important;
+	top:40% !important;
+}
+
+.ios-overlay-show{
+	-webkit-animation-name:ios-overlay-show;
+	-webkit-animation-duration:750ms;
+	-moz-animation-name:ios-overlay-show;
+	-moz-animation-duration:750ms;
+	-ms-animation-name:ios-overlay-show;
+	-ms-animation-duration:750ms;
+	-o-animation-name:ios-overlay-show;
+	-o-animation-duration:750ms;
+	animation-name:ios-overlay-show;
+	animation-duration:750ms;
+}
+
+@-webkit-keyframes ios-overlay-show{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+@-moz-keyframes ios-overlay-show{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+@-ms-keyframes ios-overlay-show{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+@-o-keyframes ios-overlay-show{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+@keyframes ios-overlay-show{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+
+.ios-overlay-hide{
+	-webkit-animation-name:ios-overlay-hide;
+	-webkit-animation-duration:750ms;
+	-webkit-animation-fill-mode:forwards;
+	-moz-animation-name:ios-overlay-hide;
+	-moz-animation-duration:750ms;
+	-moz-animation-fill-mode:forwards;
+	-ms-animation-name:ios-overlay-hide;
+	-ms-animation-duration:750ms;
+	-ms-animation-fill-mode:forwards;
+	-o-animation-name:ios-overlay-hide;
+	-o-animation-duration:750ms;
+	-o-animation-fill-mode:forwards;
+	animation-name:ios-overlay-hide;
+	animation-duration:750ms;
+	animation-fill-mode:forwards;
+}
+
+@-webkit-keyframes ios-overlay-hide{
+	0%{opacity:1;}
+	100%{opacity:0;}
+}
+@-moz-keyframes ios-overlay-hide{
+	0%{opacity:1;}
+	100%{opacity:0;}
+}
+@-ms-keyframes ios-overlay-hide{
+	0%{opacity:1;}
+	100%{opacity:0;}
+}
+@-o-keyframes ios-overlay-hide{
+	0%{opacity:1;}
+	100%{opacity:0;}
+}
+@keyframes ios-overlay-hide{
+	0%{opacity:1;}
+	100%{opacity:0;}
+}

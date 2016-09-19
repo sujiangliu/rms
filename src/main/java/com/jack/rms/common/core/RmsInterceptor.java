@@ -1,29 +1,31 @@
 package com.jack.rms.common.core;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * Created by yujialin on 14-12-29.
+ * Created by jack on 14-12-29.
  */
 public class RmsInterceptor extends HandlerInterceptorAdapter {
 
 //    @Autowired
 //    private LogisticsUserService logisticsUserService;
 
+	private Logger logger = Logger.getLogger(RmsInterceptor.class);
+	
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String logstr = "request url:" + request.getRequestURL() + ", " + request.getMethod() + ", paramMap:" + getRequestMap(request);
-        // log.info("http request：url={}", logstr);
+        logger.info("http request：url=" + logstr);
 
-        String verify_code = request.getParameter("logistics_verify_code");
-        String user_id = request.getParameter("user_id");
+//        String verify_code = request.getParameter("logistics_verify_code");
+//        String user_id = request.getParameter("user_id");
 
 //        if (!StringUtils.isBlank(verify_code) && !StringUtils.isBlank(user_id)) {
 //            Map<String, Object> userMap = logisticsUserService.getById(user_id);
@@ -39,11 +41,13 @@ public class RmsInterceptor extends HandlerInterceptorAdapter {
 //            }
 //        }
 
-        PrintWriter out = response.getWriter();
-        out.print("reSignIn");
-        out.close();
+        return super.preHandle(request, response, handler);
 
-        return false;
+//        PrintWriter out = response.getWriter();
+//        out.print("reSignIn");
+//        out.close();
+
+//        return false;
     }
 
     private static Map<String, String> getRequestMap(HttpServletRequest request) {
