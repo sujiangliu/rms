@@ -25,9 +25,9 @@ public class UserTest {
 
 	@Test
 	public void getUser() {
-		User user = userService.getUserById("10b961c8_ff44_48a1_9a00_bbe73de2bcc2");
+		User user = userService.getUserById(1);
 
-		System.out.println(user.getName());
+		System.out.println("username is " + user.getUsername() + "; nick name is " + user.getNickName());
 		
 	}
 	
@@ -54,12 +54,10 @@ public class UserTest {
 		int count = 1;
 		for (int i = 0; i < count; i++) {
 			user = new User();
-			
-			user.setId(UUID.randomUUID().toString());
-			user.setLoginName("jack111" + i);
-			user.setName("===jack===");
+			user.setUsername("jack111" + i);
+			user.setNickName("===jack===");
 			user.setPassword("e10adc3949ba59abbe56e057f20f883e");
-			user.setSuperUserFlag(1);
+			user.setRoleId(1);
 			
 			int t = userService.saveUser(user);
 			if (t <= 0) {
@@ -82,22 +80,13 @@ public class UserTest {
 					try {
 						for (int i = 0; i < 10; i++) {
 							User user = new User();
-							System.out.println("--------2---------");
-							user.setId(Thread.currentThread().getName() + "==" + i);
-							System.out.println("--------3---------");
-							user.setLoginName("jack000" + i + "=" + Thread.currentThread().getName());
-							System.out.println("--------4---------");
-							user.setName("===jack===" + Thread.currentThread().getName());
-							System.out.println("--------5---------");
+							user.setUsername("jack111" + i);
+							user.setNickName("===jack===");
 							user.setPassword("e10adc3949ba59abbe56e057f20f883e");
-							user.setSuperUserFlag(1);
-							System.out.println("--------6---------");
+							user.setRoleId(1);
 	
 							userService = SpringContextUtil.getBean("userService");
-							System.out.println("--------6111---------" + userService);
-							System.out.println("--------6222---------" + user);
 							int t = userService.saveUser(user);
-							System.out.println("--------7---------" + t);
 							if (t <= 0) {
 								System.out.println("=======save user error: number is " + i + "=========");
 							}
@@ -128,22 +117,13 @@ public class UserTest {
 					try {
 						for (int i = 0; i < 10; i++) {
 							User user = new User();
-							System.out.println("--------2---------");
-							user.setId(Thread.currentThread().getName() + "==" + i);
-							System.out.println("--------3---------");
-							user.setLoginName("jack000" + i + "=" + Thread.currentThread().getName());
-							System.out.println("--------4---------");
-							user.setName("===jack===" + Thread.currentThread().getName());
-							System.out.println("--------5---------");
+							user.setUsername("jack111" + i);
+							user.setNickName("===jack===");
 							user.setPassword("e10adc3949ba59abbe56e057f20f883e");
-							user.setSuperUserFlag(1);
-							System.out.println("--------6---------");
+							user.setRoleId(1);
 	
 							userService = SpringContextUtil.getBean("userService");
-							System.out.println("--------6111---------" + userService);
-							System.out.println("--------6222---------" + user);
 							UserMapper userMapper = userService.getUserMapper();
-							System.out.println("--------6333---------" + userMapper);
 							
 							int t = 0;
 							try {

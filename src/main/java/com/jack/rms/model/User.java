@@ -1,64 +1,60 @@
 package com.jack.rms.model;
 
+import java.util.Date;
+
 public class User {
-    private String id;
+    private Integer id;
 
-    private String name;
+    private String username;
 
-    private String loginName;
+    private String trueName;
+
+    private String nickName;
 
     private String password;
 
-    private String tel;
+    private String sex;
 
-    private String qq;
+    private Date birthday;
 
-    private String email;
+    private String mobile;
 
-    private String blog;
+    private String status;
 
-    private String address;
+    private Integer roleId;
 
-    private String currentAddress;
+    private Date createTime;
 
-    private String birthday;
-
-    private Integer loginCount;
-
-    private String updatedTime;
-
-    private String updator;
-
-    private String createdTime;
-
-    private String creator;
-
-    private Integer delFlag;
-
-    private Integer superUserFlag;
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
-    public String getLoginName() {
-        return loginName;
+    public String getTrueName() {
+        return trueName;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName == null ? null : loginName.trim();
+    public void setTrueName(String trueName) {
+        this.trueName = trueName == null ? null : trueName.trim();
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public String getPassword() {
@@ -69,115 +65,51 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getTel() {
-        return tel;
+    public String getSex() {
+        return sex;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel == null ? null : tel.trim();
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
-    public String getQq() {
-        return qq;
-    }
-
-    public void setQq(String qq) {
-        this.qq = qq == null ? null : qq.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public String getBlog() {
-        return blog;
-    }
-
-    public void setBlog(String blog) {
-        this.blog = blog == null ? null : blog.trim();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
-    public String getCurrentAddress() {
-        return currentAddress;
-    }
-
-    public void setCurrentAddress(String currentAddress) {
-        this.currentAddress = currentAddress == null ? null : currentAddress.trim();
-    }
-
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday == null ? null : birthday.trim();
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
-    public Integer getLoginCount() {
-        return loginCount;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setLoginCount(Integer loginCount) {
-        this.loginCount = loginCount;
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public String getUpdatedTime() {
-        return updatedTime;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUpdatedTime(String updatedTime) {
-        this.updatedTime = updatedTime == null ? null : updatedTime.trim();
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
-    public String getUpdator() {
-        return updator;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setUpdator(String updator) {
-        this.updator = updator == null ? null : updator.trim();
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public String getCreatedTime() {
-        return createdTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime == null ? null : createdTime.trim();
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
-    }
-
-    public Integer getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Integer delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public Integer getSuperUserFlag() {
-        return superUserFlag;
-    }
-
-    public void setSuperUserFlag(Integer superUserFlag) {
-        this.superUserFlag = superUserFlag;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

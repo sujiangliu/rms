@@ -2,253 +2,169 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jack.rms.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.jack.rms.model.User" >
-    <id column="_id" property="id" jdbcType="VARCHAR" />
-    <result column="_name" property="name" jdbcType="VARCHAR" />
-    <result column="_login_name" property="loginName" jdbcType="VARCHAR" />
-    <result column="_password" property="password" jdbcType="VARCHAR" />
-    <result column="_tel" property="tel" jdbcType="VARCHAR" />
-    <result column="_qq" property="qq" jdbcType="VARCHAR" />
-    <result column="_email" property="email" jdbcType="VARCHAR" />
-    <result column="_blog" property="blog" jdbcType="VARCHAR" />
-    <result column="_address" property="address" jdbcType="VARCHAR" />
-    <result column="_current_address" property="currentAddress" jdbcType="VARCHAR" />
-    <result column="_birthday" property="birthday" jdbcType="VARCHAR" />
-    <result column="_login_count" property="loginCount" jdbcType="INTEGER" />
-    <result column="_updated_time" property="updatedTime" jdbcType="VARCHAR" />
-    <result column="_updator" property="updator" jdbcType="VARCHAR" />
-    <result column="_created_time" property="createdTime" jdbcType="VARCHAR" />
-    <result column="_creator" property="creator" jdbcType="VARCHAR" />
-    <result column="_del_flag" property="delFlag" jdbcType="INTEGER" />
-    <result column="_super_user_flag" property="superUserFlag" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="true_name" property="trueName" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    _id, _name, _login_name, _password, _tel, _qq, _email, _blog, _address, _current_address, 
-    _birthday, _login_count, _updated_time, _updator, _created_time, _creator, _del_flag, 
-    _super_user_flag
+    id, username, true_name, nick_name, password, sex, birthday, mobile, status, role_id, 
+    create_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    where _id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    where _name = #{name,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sys_user
-    where _id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jack.rms.model.User" >
-    insert into sys_user (_id, _name, _login_name, 
-      _password, _tel, _qq, 
-      _email, _blog, _address, 
-      _current_address, _birthday, _login_count, 
-      _updated_time, _updator, _created_time, 
-      _creator, _del_flag, _super_user_flag
-      )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{blog,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{currentAddress,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{loginCount,jdbcType=INTEGER}, 
-      #{updatedTime,jdbcType=VARCHAR}, #{updator,jdbcType=VARCHAR}, #{createdTime,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{superUserFlag,jdbcType=INTEGER}
-      )
+    insert into sys_user (id, username, true_name, 
+      nick_name, password, sex, 
+      birthday, mobile, status, 
+      role_id, create_time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{trueName,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{birthday,jdbcType=DATE}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{roleId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jack.rms.model.User" >
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        _id,
+        id,
       </if>
-      <if test="name != null" >
-        _name,
+      <if test="username != null" >
+        username,
       </if>
-      <if test="loginName != null" >
-        _login_name,
+      <if test="trueName != null" >
+        true_name,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
       </if>
       <if test="password != null" >
-        _password,
+        password,
       </if>
-      <if test="tel != null" >
-        _tel,
-      </if>
-      <if test="qq != null" >
-        _qq,
-      </if>
-      <if test="email != null" >
-        _email,
-      </if>
-      <if test="blog != null" >
-        _blog,
-      </if>
-      <if test="address != null" >
-        _address,
-      </if>
-      <if test="currentAddress != null" >
-        _current_address,
+      <if test="sex != null" >
+        sex,
       </if>
       <if test="birthday != null" >
-        _birthday,
+        birthday,
       </if>
-      <if test="loginCount != null" >
-        _login_count,
+      <if test="mobile != null" >
+        mobile,
       </if>
-      <if test="updatedTime != null" >
-        _updated_time,
+      <if test="status != null" >
+        status,
       </if>
-      <if test="updator != null" >
-        _updator,
+      <if test="roleId != null" >
+        role_id,
       </if>
-      <if test="createdTime != null" >
-        _created_time,
-      </if>
-      <if test="creator != null" >
-        _creator,
-      </if>
-      <if test="delFlag != null" >
-        _del_flag,
-      </if>
-      <if test="superUserFlag != null" >
-        _super_user_flag,
+      <if test="createTime != null" >
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="loginName != null" >
-        #{loginName,jdbcType=VARCHAR},
+      <if test="trueName != null" >
+        #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="tel != null" >
-        #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="qq != null" >
-        #{qq,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="blog != null" >
-        #{blog,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="currentAddress != null" >
-        #{currentAddress,jdbcType=VARCHAR},
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
       </if>
       <if test="birthday != null" >
-        #{birthday,jdbcType=VARCHAR},
+        #{birthday,jdbcType=DATE},
       </if>
-      <if test="loginCount != null" >
-        #{loginCount,jdbcType=INTEGER},
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="updatedTime != null" >
-        #{updatedTime,jdbcType=VARCHAR},
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
       </if>
-      <if test="updator != null" >
-        #{updator,jdbcType=VARCHAR},
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="createdTime != null" >
-        #{createdTime,jdbcType=VARCHAR},
-      </if>
-      <if test="creator != null" >
-        #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="delFlag != null" >
-        #{delFlag,jdbcType=INTEGER},
-      </if>
-      <if test="superUserFlag != null" >
-        #{superUserFlag,jdbcType=INTEGER},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jack.rms.model.User" >
     update sys_user
     <set >
-      <if test="name != null" >
-        _name = #{name,jdbcType=VARCHAR},
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="loginName != null" >
-        _login_name = #{loginName,jdbcType=VARCHAR},
+      <if test="trueName != null" >
+        true_name = #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        _password = #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="tel != null" >
-        _tel = #{tel,jdbcType=VARCHAR},
-      </if>
-      <if test="qq != null" >
-        _qq = #{qq,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        _email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="blog != null" >
-        _blog = #{blog,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        _address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="currentAddress != null" >
-        _current_address = #{currentAddress,jdbcType=VARCHAR},
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
       </if>
       <if test="birthday != null" >
-        _birthday = #{birthday,jdbcType=VARCHAR},
+        birthday = #{birthday,jdbcType=DATE},
       </if>
-      <if test="loginCount != null" >
-        _login_count = #{loginCount,jdbcType=INTEGER},
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="updatedTime != null" >
-        _updated_time = #{updatedTime,jdbcType=VARCHAR},
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
       </if>
-      <if test="updator != null" >
-        _updator = #{updator,jdbcType=VARCHAR},
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="createdTime != null" >
-        _created_time = #{createdTime,jdbcType=VARCHAR},
-      </if>
-      <if test="creator != null" >
-        _creator = #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="delFlag != null" >
-        _del_flag = #{delFlag,jdbcType=INTEGER},
-      </if>
-      <if test="superUserFlag != null" >
-        _super_user_flag = #{superUserFlag,jdbcType=INTEGER},
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where _id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jack.rms.model.User" >
     update sys_user
-    set _name = #{name,jdbcType=VARCHAR},
-      _login_name = #{loginName,jdbcType=VARCHAR},
-      _password = #{password,jdbcType=VARCHAR},
-      _tel = #{tel,jdbcType=VARCHAR},
-      _qq = #{qq,jdbcType=VARCHAR},
-      _email = #{email,jdbcType=VARCHAR},
-      _blog = #{blog,jdbcType=VARCHAR},
-      _address = #{address,jdbcType=VARCHAR},
-      _current_address = #{currentAddress,jdbcType=VARCHAR},
-      _birthday = #{birthday,jdbcType=VARCHAR},
-      _login_count = #{loginCount,jdbcType=INTEGER},
-      _updated_time = #{updatedTime,jdbcType=VARCHAR},
-      _updator = #{updator,jdbcType=VARCHAR},
-      _created_time = #{createdTime,jdbcType=VARCHAR},
-      _creator = #{creator,jdbcType=VARCHAR},
-      _del_flag = #{delFlag,jdbcType=INTEGER},
-      _super_user_flag = #{superUserFlag,jdbcType=INTEGER}
-    where _id = #{id,jdbcType=VARCHAR}
+    set username = #{username,jdbcType=VARCHAR},
+      true_name = #{trueName,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

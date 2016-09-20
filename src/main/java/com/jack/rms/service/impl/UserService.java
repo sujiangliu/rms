@@ -14,7 +14,7 @@ public class UserService implements IUserService {
 	@Autowired
 	private UserMapper userMapper;
 	
-	public User getUserById(String id) {
+	public User getUserById(int id) {
 		User user = userMapper.selectByPrimaryKey(id);
 		return user;
 	}

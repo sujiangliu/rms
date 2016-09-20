@@ -18,6 +18,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.jack.rms.model.User;
+
 public class BaseController {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -143,6 +145,15 @@ public class BaseController {
         }
 
         return ip;
+    }
+    
+    public User getCurrUser() {
+    	HttpSession session = getSessionContext();
+    	Object o = session.getAttribute("user");
+    	if (null == o) {
+    		return null;
+    	}
+    	return (User) o;
     }
 }
 

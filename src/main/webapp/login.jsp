@@ -25,7 +25,7 @@
             <label for="password">密码</label>
             <input type="password" name="password" placeholder="请输入密码" required=""></p>
           <p>
-            <input type="submit" name="submit" onclick="return subimitForm()" value="登陆"></p>
+            <input type="submit" name="submit" onclick="return subimitForm();" value="登陆"></p>
         </form>
     </div>
 </body>
