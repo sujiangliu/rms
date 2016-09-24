@@ -2,11 +2,13 @@ package com.jack.rms.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jack.rms.common.core.BaseController;
 import com.jack.rms.model.User;
 
+@Controller
 public class IndexController extends BaseController {
 
 	@RequestMapping("/index")

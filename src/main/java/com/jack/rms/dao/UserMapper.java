@@ -1,5 +1,7 @@
 package com.jack.rms.dao;
 
+import java.util.List;
+
 import com.jack.rms.model.User;
 
 public interface UserMapper {
@@ -12,6 +14,8 @@ public interface UserMapper {
     User selectByPrimaryKey(Integer id);
     
     User selectByUsername(String username);
+    
+    List<User> selectAllUsers();
 
     int updateByPrimaryKeySelective(User record);
 

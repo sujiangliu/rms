@@ -1,5 +1,7 @@
 package com.jack.rms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +37,10 @@ public class UserService implements IUserService {
 	
 	public UserMapper getUserMapper() {
 		return userMapper;
+	}
+
+	@Override
+	public List<User> getUsersByPage() {
+		return userMapper.selectAllUsers();
 	}
 }
