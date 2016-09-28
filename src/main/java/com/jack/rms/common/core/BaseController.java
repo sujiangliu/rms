@@ -149,6 +149,9 @@ public class BaseController {
     
     public User getCurrUser() {
     	HttpSession session = getSessionContext();
+    	if (null == session) {
+    		return null;
+    	}
     	Object o = session.getAttribute("user");
     	if (null == o) {
     		return null;

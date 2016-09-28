@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jack.rms.dao.UserMapper;
 import com.jack.rms.model.User;
+import com.jack.rms.model.request.UserQueryParam;
 
 public interface IUserService {
 
@@ -15,5 +16,7 @@ public interface IUserService {
 	
 	public UserMapper getUserMapper();
 	
-	public List<User> getUsersByPage();
+	public List<User> getUsersByPage(UserQueryParam userQueryParam);
+	
+	public int countUsersByPage(UserQueryParam userQueryParam);
 }

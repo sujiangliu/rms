@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jack.rms.common.SpringContextUtil;
 import com.jack.rms.dao.UserMapper;
 import com.jack.rms.model.User;
+import com.jack.rms.model.request.UserQueryParam;
 import com.jack.rms.service.IUserService;
 
 @Service
@@ -40,7 +41,13 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List<User> getUsersByPage() {
-		return userMapper.selectAllUsers();
+	public List<User> getUsersByPage(UserQueryParam userQueryParam) {
+		return userMapper.selectAllUsers(userQueryParam);
+	}
+	
+	@Override
+	public int countUsersByPage(UserQueryParam userQueryParam) {
+		
+		return userMapper.countUsersByPage(userQueryParam);
 	}
 }

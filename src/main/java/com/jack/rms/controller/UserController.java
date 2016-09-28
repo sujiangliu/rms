@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jack.rms.common.core.BaseController;
 import com.jack.rms.common.utils.MD5Util;
+import com.jack.rms.model.PageResponse;
 import com.jack.rms.model.User;
+import com.jack.rms.model.request.UserQueryParam;
 import com.jack.rms.service.IUserService;
 
 import javafx.print.JobSettings;
@@ -48,10 +50,24 @@ public class UserController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping("list")
-	public String list() {
+	public PageResponse list(UserQueryParam userQueryParam) {
 		
-		List<User> users = userService.getUsersByPage();
+		if (null == userQueryParam.getPageNumber()) {
+			userQueryParam.setPageNumber(0);
+		}
+		if (null == userQueryParam.getPageSize()) {
+			userQueryParam.setPageSize(10);
+		}
+		userQueryParam.setStartNumber((userQueryParam.getPageNumber() - 1) * userQueryParam.getPageSize());
 		
-		return "";
+		int total = userService.countUsersByPage(userQueryParam);
+		List<User> users = userService.getUsersByPage(userQueryParam);
+		
+		PageResponse pageResponse = new PageResponse();
+		pageResponse.setTotal(total);
+		pageResponse.setPageNumber(userQueryParam.getPageNumber());
+		pageResponse.setResults(users);
+		
+		return pageResponse;
 	}
 }

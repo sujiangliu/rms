@@ -3,6 +3,7 @@ package com.jack.rms.dao;
 import java.util.List;
 
 import com.jack.rms.model.User;
+import com.jack.rms.model.request.UserQueryParam;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -15,7 +16,9 @@ public interface UserMapper {
     
     User selectByUsername(String username);
     
-    List<User> selectAllUsers();
+    List<User> selectAllUsers(UserQueryParam userQueryParam);
+    
+    int countUsersByPage(UserQueryParam userQueryParam);
 
     int updateByPrimaryKeySelective(User record);
 

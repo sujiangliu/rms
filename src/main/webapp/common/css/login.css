@@ -1,4 +1,4 @@
-/* Í¨ÓÃÑùÊ½ */
+/* Í¨ï¿½ï¿½ï¿½ï¿½Ê½ */
 *,
 *:after,
 *:before {
@@ -17,15 +17,16 @@
     clear: both;
 }
 
-/* ±³¾°Í¼Æ¬ */
+/* ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ */
 body {
-	background:#7f9b4e url(../img/logo_bg.jpg) no-repeat center top;
+	/* background:#7f9b4e url(../img/logo_bg.jpg) no-repeat center top;*/
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
 	background-size:cover;
+	background-color:#666;
 }
 
-/* µÇÂ½±íµ¥ */
+/* ï¿½ï¿½Â½ï¿½ï¿½ */
 .loginForm {
     width: 300px;
     margin: 120px auto 30px;
@@ -36,7 +37,7 @@ body {
     text-shadow: 0 2px 1px rgba(0,0,0,0.3);
 }
 
-/* ±íµ¥ÑùÊ½ */
+/* ï¿½ï¿½ï¿½ï¿½Ê½ */
 .loginForm h1 {
     font-size: 22px;
     padding-bottom: 20px;
@@ -84,7 +85,7 @@ body {
     border-color: #333;
 }
 
-/*ÎÄ±¾¿ò¾Û½¹ºó£¬¸Ä±ä±ß¿ò±³¾°*/
+/*ï¿½Ä±ï¿½ï¿½ï¿½Û½ï¿½ï¿½ó£¬¸Ä±ï¿½ß¿ò±³¾ï¿½*/
 .loginForm input[type=text]:focus,
 .loginForm input[type=password]:focus,
 .loginForm input[type=submit]:focus {
@@ -142,7 +143,7 @@ body {
     border-color: #333;
 }
 
-/* µ¯¿òÌáÊ¾ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ */
 .ui-ios-overlay{
 	z-index:99999;
 	position:fixed;
