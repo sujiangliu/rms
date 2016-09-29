@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
     pageEncoding="UTF-8"%>
 <%
 	String scheme = request.getScheme();
@@ -10,5 +10,5 @@
 	String baseURL = scheme + "://" + serverName + ":"+ port + contextPath;
 
 	request.setAttribute("baseURL", baseURL);
-	System.out.println(baseURL);
+	System.out.println("baseURL=" + baseURL);
 %>
