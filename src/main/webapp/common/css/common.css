@@ -1,3 +1,41 @@
 @CHARSET "UTF-8";
 
 *{padding:0px; margin:0px;}
+
+.clear {
+	clear:both;
+}
+.search{
+	width:95%;
+	padding:10px;
+}
+.search_item {
+	width:30%;
+}
+.search_item label{
+	width:10%;
+	height:25px;
+	line-height:25px;
+}
+.search_item span{
+	width:40%;
+	height:25px;
+	line-height:25px;
+}
+
+.operator_area {
+	width:95%;
+	padding:10px;
+}
+
+.column_form {
+	width:100%;
+	height:40px;
+}
+.column_form label{
+	width:20%:
+	text-align:right;
+}
+.column_form span{
+	width:80%;
+}

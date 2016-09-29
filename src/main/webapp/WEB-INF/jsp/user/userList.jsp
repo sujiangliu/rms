@@ -20,11 +20,41 @@
 		</div>
 		<div data-options="region:'center',title:'主页面',iconCls:'icon-ok'">
 			<div id="mainPanel">
-				<div id="search">
+				<div class="search">
+					<span class="search_item">
+						<label>用户名</label>
+						<span><input type="text" class="easyui-textbox" style="width:150px;height:32px"/></span>
+					</span>
+					<span class="search_item">
+						<label>电话</label>
+						<span><input type="text" class="easyui-textbox" style="width:150px;height:32px"/></span>
+					</span>
 					
+					<a id="searchUserBtn" href="#" class="easyui-linkbutton" >搜索</a>
 				</div>
+				<div class="operator_area">
+					<a id="addUserBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新增</a>
+				</div>
+				<div class="clear"></div>
 				<table id="userDataGrid"></table>
 				<div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
+				
+				<div id="editUserWin" class="easyui-window" title="用户信息" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:350px;height:500px;padding:10px;">
+					<form>
+						<span class="column_form">
+							<label>用户名</label>
+							<span><input type="text" class="easyui-textbox" style="width:250px;height:32px"/></span>
+						</span>
+						<span class="column_form">
+							<label>真实姓名</label>
+							<span><input type="text" class="easyui-textbox" style="width:250px;height:32px"/></span>
+						</span>
+						<span class="column_form">
+							<label>真实姓名</label>
+							<span><input type="text" class="easyui-textbox" style="width:250px;height:32px"/></span>
+						</span>
+					</form>
+				</div>
 				
 			</div>
 		</div>
