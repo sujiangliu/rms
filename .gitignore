@@ -12,7 +12,7 @@ rebel.xml
 out/
 
 WebRoot/WEB-INF/classes/*
-src/main/webapp/WEB-INF/*
+src/main/webapp/WEB-INF/classes/*
 *.class
 
 *.class
