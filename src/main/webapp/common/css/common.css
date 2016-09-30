@@ -31,11 +31,14 @@
 .column_form {
 	width:100%;
 	height:40px;
+	margin-top:10px;
+	display: block;
 }
 .column_form label{
-	width:20%:
+	width:20%;
 	text-align:right;
+	display: inline-block;
 }
 .column_form span{
-	width:80%;
+	display: inline-block;
 }

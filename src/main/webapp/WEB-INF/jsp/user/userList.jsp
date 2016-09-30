@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -40,19 +40,54 @@
 				<div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
 				
 				<div id="editUserWin" class="easyui-window" title="用户信息" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:350px;height:500px;padding:10px;">
-					<form>
+					<form class="userForm">
+						<input type="hidden" name="id" />
 						<span class="column_form">
 							<label>用户名</label>
-							<span><input type="text" class="easyui-textbox" style="width:250px;height:32px"/></span>
+							<span><input name="username" type="text" class="easyui-validatebox" data-options="required:true" style="width:200px;height:32px"/></span>
 						</span>
 						<span class="column_form">
 							<label>真实姓名</label>
-							<span><input type="text" class="easyui-textbox" style="width:250px;height:32px"/></span>
+							<span><input name="trueName" type="text" class="easyui-validatebox" data-options="required:true" style="width:200px;height:32px"/></span>
 						</span>
 						<span class="column_form">
-							<label>真实姓名</label>
-							<span><input type="text" class="easyui-textbox" style="width:250px;height:32px"/></span>
+							<label>昵称</label>
+							<span><input name="nickName" type="text" class="easyui-validatebox" data-options="required:true" style="width:200px;height:32px"/></span>
 						</span>
+						<span class="column_form">
+							<label>手机号码</label>
+							<span><input name="mobile" type="text" class="easyui-validatebox" data-options="required:true" style="width:200px;height:32px"/></span>
+						</span>
+						<span class="column_form">
+							<label>密码</label>
+							<span><input name="password" type="password" class="easyui-textbox" style="width:200px;height:32px"/></span>
+						</span>
+						<span class="column_form">
+							<label>性别</label>
+							<span>
+								<select name="sex" class="easyui-combobox" data-options="required:true" style="width:200px;">
+								    <option value="男">男</option>
+								    <option value="女">女</option>
+								</select>
+							</span>
+						</span>
+						<span class="column_form">
+							<label>生日</label>
+							<span>
+								<input name="birthday" class="easyui-datebox" data-options="required:true" style="width:200px;"/>
+							</span>
+						</span>
+						<span class="column_form">
+							<label>角色</label>
+							<span>
+								<select class="easyui-combobox" name="roleId" data-options="required:true" style="width:200px;" >
+								    <option value="1" style="width:100%;">管理员</option>
+								    <option value="2">内部员工</option>
+								    <option value="3">用户</option>
+								</select>
+							</span>
+						</span>
+						<a id="submitAddUserBtn" href="#" class="easyui-linkbutton" >新增</a>
 					</form>
 				</div>
 				

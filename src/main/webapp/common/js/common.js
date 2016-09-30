@@ -8,3 +8,11 @@ function showMessage(content, time) {
 		time : time,
 	});
 }
+
+function isEmpty(str) {
+	if (null == str || undefined == str || str.length <= 0) {
+		return true;
+	}
+	
+	return false;
+}

@@ -7,6 +7,7 @@ $(function(){
 function initBinding(){
 	$("#searchUserBtn").click(function(){alert("todo")});
 	$("#addUserBtn").click(addUser);
+	$("#submitAddUserBtn").click(submitAddUser);
 }
 function initTree() {
 	$('#userDataGrid').datagrid({   
@@ -23,7 +24,7 @@ function initTree() {
 	});  
 }
 function formatOper(val, row, index){
-	return '<a href="#" onclick="editUser('+row.id+')">修改</a>&nbsp;<a href="#" onclick="delUser('+row.id+')">删除</a>';
+	return '<a href="#" onclick="editUser('+row+')">修改</a>&nbsp;<a href="#" onclick="delUser('+row.id+')">删除</a>';
 }
 function formatBirthday(value,row,index){
 	var unixTimestamp = new Date(value);  
@@ -32,12 +33,6 @@ function formatBirthday(value,row,index){
 function formatDatetime(value,row,index){
 	var unixTimestamp = new Date(value);  
 	return unixTimestamp.format("yyyy-MM-dd hh:mm:ss");  
-}
-function editUser(id) {
-	alert("edit" + id);
-}
-function delUser(id) {
-	alert("del" + id);
 }
 function initPagination(total, pageSize) {
 	if (null == total || undefined == total) {
@@ -107,6 +102,76 @@ function getUserList() {
 		}
 	});
 }
-function addUser(){
+
+function editUser(user) {
 	$("#editUserWin").panel({'title':'新增用户'}).window("open");
+	g_addOrEdit = "edit";
+	
+	$(".userForm input[name='id']").val(user.id);
+	$(".userForm input[name='username']").val(user.username);
+	$(".userForm input[name='trueName']").val(user.trueName);
+	$(".userForm input[name='nickName']").val(user.nickName);
+	$(".userForm input[name='password']").val();
+	$(".userForm input[name='mobile']").val(user.mobile);
+	$(".userForm input[name='birthday']").val(user.birthday);
+	$(".userForm select[name='sex']").val(user.sex);
+	$(".userForm select[name='roleId']").val(user.roleId);
+}
+function delUser(id) {
+	alert("del" + id);
+}
+
+g_addOrEdit = "add";
+function addUser(){
+	// $(".userForm").reset();
+	$("#editUserWin").panel({'title':'新增用户'}).window("open");
+	g_addOrEdit = "add";
+	
+	// $(".userForm input[name='password']")
+}
+
+function submitAddUser() {
+	validForm();
+	
+	var user = {};
+	user.id = $(".userForm input[name='id']").val();
+	user.username = $(".userForm input[name='username']").val();
+	user.trueName = $(".userForm input[name='trueName']").val();
+	user.nickName = $(".userForm input[name='nickName']").val();
+	user.password = $(".userForm input[name='password']").val();
+	user.mobile = $(".userForm input[name='mobile']").val();
+	user.birthday = $(".userForm input[name='birthday']").val();
+	user.sex = $(".userForm select[comboname='sex']").val();
+	user.roleId = $(".userForm select[comboname='roleId']").val();
+	
+	$.ajax({
+		type : "post",
+		data : user,
+		url : $("#baseURL").val() + "/user/add",
+		success : function(result) {
+			$("#editUserWin").panel({'title':'新增用户'}).window("close");
+			getUserList();
+		}
+	});
+}
+function validForm(){
+	var id = $(".userForm input[name='id']").val();
+	if ("edit" == g_addOrEdit && isEmpty(id)) {
+		showMessage("信息获取错误，请刷新页面");
+	}
+//	var username = $(".userForm input[name='username']").val();
+//	if (isEmpty(username)) {
+//		showMessage("用户名不能为空");
+//	}
+	
+	var trueName = $(".userForm input[name='trueName']").val();
+	var nickName = $(".userForm input[name='nickName']").val();
+	var password = $(".userForm input[name='password']").val();
+	if ("add" == g_addOrEdit && isEmpty(password)) {
+		showMessage("密码不能为空");
+	}
+//	var mobile = $(".userForm input[name='mobile']").val();
+//	var birthday = $(".userForm input[name='birthday']").val();
+//	var sex = $(".userForm select[name='sex']").val();
+//	var roleId = $(".userForm select[name='roleId']").val();
 }

@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${baseURL }/common/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="${baseURL }/common/css/common.css">
 <!-- 引用js -->
+<script type="text/javascript" src="${baseURL }/common/js/common.js"></script>
 <script type="text/javascript" src="${baseURL }/common/js/DateUtil.js"></script>
 <script type="text/javascript" src="${baseURL }/common/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="${baseURL }/common/easyui/jquery.easyui.min.js"></script>

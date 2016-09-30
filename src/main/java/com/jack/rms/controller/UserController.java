@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.JsonSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +16,6 @@ import com.jack.rms.model.PageResponse;
 import com.jack.rms.model.User;
 import com.jack.rms.model.request.UserQueryParam;
 import com.jack.rms.service.IUserService;
-
-import javafx.print.JobSettings;
 
 @Controller
 @RequestMapping("/user")
@@ -69,5 +66,18 @@ public class UserController extends BaseController {
 		pageResponse.setResults(users);
 		
 		return pageResponse;
+	}
+	
+	@RequestMapping("/add")
+	@ResponseBody
+	public String add(User user) {
+		
+		if (null == user) {
+			return "用户信息不正确";
+		}
+		
+		 userService.saveUser(user);
+		
+		return "200";
 	}
 }
