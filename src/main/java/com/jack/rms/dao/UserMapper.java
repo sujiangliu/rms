@@ -16,6 +16,8 @@ public interface UserMapper {
     
     User selectByUsername(String username);
     
+    User selectByMobile(String mobile);
+    
     List<User> selectAllUsers(UserQueryParam userQueryParam);
     
     int countUsersByPage(UserQueryParam userQueryParam);

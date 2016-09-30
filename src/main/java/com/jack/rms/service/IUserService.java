@@ -12,6 +12,8 @@ public interface IUserService {
 	
 	public User getUserByUsername(String username);
 	
+	public User getUserByMobile(String mobile);
+	
 	public int saveUser(User user);
 	
 	public UserMapper getUserMapper();

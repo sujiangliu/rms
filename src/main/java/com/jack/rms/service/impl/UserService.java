@@ -26,6 +26,10 @@ public class UserService implements IUserService {
 		User user = userMapper.selectByUsername(username);
 		return user;
 	}
+	public User getUserByMobile(String mobile) {
+		User user = userMapper.selectByMobile(mobile);
+		return user;
+	}
 	
 	public int saveUser(User user) {
 		

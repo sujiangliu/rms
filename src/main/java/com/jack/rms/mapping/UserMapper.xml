@@ -31,6 +31,13 @@
     where username = #{username,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectAllUsers" resultMap="BaseResultMap" parameterType="com.jack.rms.model.request.UserQueryParam" >
       select 
 	    <include refid="Base_Column_List" />

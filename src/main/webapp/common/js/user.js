@@ -149,8 +149,13 @@ function submitAddUser() {
 		data : user,
 		url : $("#baseURL").val() + "/user/add",
 		success : function(result) {
-			$("#editUserWin").panel({'title':'新增用户'}).window("close");
-			getUserList();
+			if ("200" == result) {
+				$("#editUserWin").panel({'title':'新增用户'}).window("close");
+				getUserList();
+			}
+			else {
+				showMessage(result);
+			}
 		}
 	});
 }

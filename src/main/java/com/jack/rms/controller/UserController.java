@@ -75,9 +75,19 @@ public class UserController extends BaseController {
 		if (null == user) {
 			return "用户信息不正确";
 		}
+		User user2 = userService.getUserByUsername(user.getUsername());
+		if (null != user2) {
+			return "用户名已存在";
+		}
+		user2 = userService.getUserByMobile(user.getMobile());
+		if (null != user2) {
+			return "手机号码已存在";
+		}
 		
-		 userService.saveUser(user);
-		
+		int i = userService.saveUser(user);
+		if (i < 1) {
+			return "新增失败";
+		}
 		return "200";
 	}
 }
