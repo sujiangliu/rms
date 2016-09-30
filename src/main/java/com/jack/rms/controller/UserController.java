@@ -83,6 +83,7 @@ public class UserController extends BaseController {
 		if (null != user2) {
 			return "手机号码已存在";
 		}
+		user.setPassword(MD5Util.MD5(user.getPassword()));
 		
 		int i = userService.saveUser(user);
 		if (i < 1) {
