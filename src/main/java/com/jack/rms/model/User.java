@@ -1,8 +1,12 @@
 package com.jack.rms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class User implements Serializable {
+	
     private Integer id;
 
     private String username;
@@ -15,6 +19,7 @@ public class User {
 
     private String sex;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthday;
 
     private String mobile;

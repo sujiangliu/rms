@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jack.rms.dao.RmsDomainMapper" >
+  <resultMap id="BaseResultMap" type="com.jack.rms.model.RmsDomain" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="d_type" property="dType" jdbcType="VARCHAR" />
+    <result column="d_value" property="dValue" jdbcType="VARCHAR" />
+    <result column="d_name" property="dName" jdbcType="VARCHAR" />
+    <result column="d_comment" property="dComment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, d_type, d_value, d_name, d_comment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rms_domain
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAllRmsDomains" resultMap="BaseResultMap" parameterType="com.jack.rms.model.request.RmsDomainQueryParam" >
+      select 
+	    <include refid="Base_Column_List" />
+	    from rms_domain
+	    <where>
+	        <trim prefixOverrides="and">
+		        <if test="null != dType and dType != ''" >
+		            and d_type = #{dType, jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+	    </where>
+	    <if test="null != startNumber and null != pageSize">
+			limit ${startNumber}, ${pageSize}
+	    </if>
+  </select>
+  
+  <select id="countRmsDomainsByPage" resultType="int" parameterType="com.jack.rms.model.request.RmsDomainQueryParam" >
+      select 
+	    count(1)
+	    from rms_domain
+	    <where>
+	        <trim prefixOverrides="and">
+		       <if test="null != dType and dType != ''" >
+		            and d_type = #{dType, jdbcType=VARCHAR}
+		        </if>
+	        </trim>
+	    </where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rms_domain
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jack.rms.model.RmsDomain" >
+    insert into rms_domain (id, d_type, d_value, 
+      d_name, d_comment)
+    values (#{id,jdbcType=INTEGER}, #{dType,jdbcType=VARCHAR}, #{dValue,jdbcType=VARCHAR}, 
+      #{dName,jdbcType=VARCHAR}, #{dComment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jack.rms.model.RmsDomain" >
+    insert into rms_domain
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dType != null" >
+        d_type,
+      </if>
+      <if test="dValue != null" >
+        d_value,
+      </if>
+      <if test="dName != null" >
+        d_name,
+      </if>
+      <if test="dComment != null" >
+        d_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dType != null" >
+        #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dValue != null" >
+        #{dValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null" >
+        #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dComment != null" >
+        #{dComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jack.rms.model.RmsDomain" >
+    update rms_domain
+    <set >
+      <if test="dType != null" >
+        d_type = #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dValue != null" >
+        d_value = #{dValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null" >
+        d_name = #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dComment != null" >
+        d_comment = #{dComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jack.rms.model.RmsDomain" >
+    update rms_domain
+    set d_type = #{dType,jdbcType=VARCHAR},
+      d_value = #{dValue,jdbcType=VARCHAR},
+      d_name = #{dName,jdbcType=VARCHAR},
+      d_comment = #{dComment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

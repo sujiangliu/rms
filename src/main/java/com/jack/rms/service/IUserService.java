@@ -16,6 +16,10 @@ public interface IUserService {
 	
 	public int saveUser(User user);
 	
+	public int updateUser(User user);
+	
+	public int delUser(Integer userId);
+	
 	public UserMapper getUserMapper();
 	
 	public List<User> getUsersByPage(UserQueryParam userQueryParam);

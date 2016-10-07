@@ -26,6 +26,5 @@ function goUserPage () {
 }
 
 function goHousePage() {
-	console.log("==goHousePage==");
-	$("#mainPanel").html("12312");
+	window.location.href = $("#baseURL").val() + "/house/housePage";
 }

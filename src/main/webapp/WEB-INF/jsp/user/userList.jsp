@@ -6,8 +6,6 @@
 <head>
 	<title>RMS</title>
 	<jsp:include page="../../../common.jsp"></jsp:include>
-	<script src="${baseURL}/common/js/menu.js"></script>
-	<script src="${baseURL}/common/js/user.js"></script>
 </head>
 <body>
 	<input id="baseURL" type="hidden" value="${baseURL }" />
@@ -23,11 +21,11 @@
 				<div class="search">
 					<span class="search_item">
 						<label>用户名</label>
-						<span><input type="text" class="easyui-textbox" style="width:150px;height:32px"/></span>
+						<span><input id="searchUsernameTxt" type="text" class="easyui-textbox" style="width:150px;height:32px"/></span>
 					</span>
 					<span class="search_item">
 						<label>电话</label>
-						<span><input type="text" class="easyui-textbox" style="width:150px;height:32px"/></span>
+						<span><input id="searchMobileTxt" type="text" class="easyui-textbox" style="width:150px;height:32px"/></span>
 					</span>
 					
 					<a id="searchUserBtn" href="#" class="easyui-linkbutton" >搜索</a>
@@ -74,7 +72,7 @@
 						<span class="column_form">
 							<label>生日</label>
 							<span>
-								<input name="birthday" class="easyui-datebox" data-options="required:true" style="width:200px;"/>
+								<input id="birthday" name="birthday" class="easyui-datebox" data-options="required:true" style="width:200px;"/>
 							</span>
 						</span>
 						<span class="column_form">
@@ -88,14 +86,18 @@
 							</span>
 						</span>
 						<a id="submitAddUserBtn" href="#" class="easyui-linkbutton" >新增</a>
+						<a id="submitMdyUserBtn" href="#" class="easyui-linkbutton" >修改</a>
 					</form>
 				</div>
 				
 			</div>
 		</div>
 	</div>
+</body>
+</html>
+
 	<script type="text/javascript">
 		$(".easyui-layout").height($(window).height());
 	</script>
-</body>
-</html>
+	<script src="${baseURL}/common/js/menu.js"></script>
+	<script src="${baseURL}/common/js/user.js"></script>

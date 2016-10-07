@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jack.rms.dao.HouseMapper" >
+  <resultMap id="BaseResultMap" type="com.jack.rms.model.House" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="h_type" property="hType" jdbcType="VARCHAR" />
+    <result column="rent_type" property="rentType" jdbcType="VARCHAR" />
+    <result column="h_name" property="hName" jdbcType="VARCHAR" />
+    <result column="h_address" property="hAddress" jdbcType="VARCHAR" />
+    <result column="h_bedroom_num" property="hBedroomNum" jdbcType="INTEGER" />
+    <result column="h_livingroom_num" property="hLivingroomNum" jdbcType="INTEGER" />
+    <result column="h_washroom_num" property="hWashroomNum" jdbcType="INTEGER" />
+    <result column="h_area" property="hArea" jdbcType="INTEGER" />
+    <result column="h_decation" property="hDecation" jdbcType="VARCHAR" />
+    <result column="h_direction" property="hDirection" jdbcType="VARCHAR" />
+    <result column="h_floor_total" property="hFloorTotal" jdbcType="INTEGER" />
+    <result column="h_floor" property="hFloor" jdbcType="INTEGER" />
+    <result column="h_no" property="hNo" jdbcType="VARCHAR" />
+    <result column="h_rent" property="hRent" jdbcType="INTEGER" />
+    <result column="h_rent_type" property="hRentType" jdbcType="VARCHAR" />
+    <result column="h_title" property="hTitle" jdbcType="VARCHAR" />
+    <result column="h_content" property="hContent" jdbcType="VARCHAR" />
+    <result column="h_checkin_date" property="hCheckinDate" jdbcType="DATE" />
+    <result column="h_contact" property="hContact" jdbcType="VARCHAR" />
+    <result column="h_phone" property="hPhone" jdbcType="VARCHAR" />
+    <result column="h_lon" property="hLon" jdbcType="DECIMAL" />
+    <result column="h_lat" property="hLat" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, h_type, rent_type, h_name, h_address, h_bedroom_num, h_livingroom_num, h_washroom_num, 
+    h_area, h_decation, h_direction, h_floor_total, h_floor, h_no, h_rent, h_rent_type, 
+    h_title, h_content, h_checkin_date, h_contact, h_phone, h_lon, h_lat
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rms_house
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllHouses" resultMap="BaseResultMap" parameterType="com.jack.rms.model.request.HouseQueryParam" >
+      select 
+	    <include refid="Base_Column_List" />
+	    from rms_house
+	    <where>
+	        <trim prefixOverrides="and">
+		        <if test="null != hName and hName != ''" >
+		            and h_name like CONCAT('%', #{hName, jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="null != hAddress and hAddress != ''" >
+		            and h_address like CONCAT('%', #{hAddress, jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="null != hContent and hContent != ''" >
+		            and h_content like CONCAT('%', #{hContent, jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="null != hBedroomNum" >
+		            and h_bedroom_num = #{hBedroomNum, jdbcType=INTEGER}
+		        </if>
+	        </trim>
+	    </where>
+	    <if test="null != startNumber and null != pageSize">
+			limit ${startNumber}, ${pageSize}
+	    </if>
+  </select>
+  
+  <select id="countHousesByPage" resultType="int" parameterType="com.jack.rms.model.request.HouseQueryParam" >
+      select 
+	    count(1)
+	    from rms_house
+	    <where>
+	        <trim prefixOverrides="and">
+		        <if test="null != hName and hName != ''" >
+		            and h_name like CONCAT('%', #{hName, jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="null != hAddress and hAddress != ''" >
+		            and h_address like CONCAT('%', #{hAddress, jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="null != hContent and hContent != ''" >
+		            and h_content like CONCAT('%', #{hContent, jdbcType=VARCHAR},'%')
+		        </if>
+		        <if test="null != hBedroomNum" >
+		            and h_bedroom_num = #{hBedroomNum, jdbcType=INTEGER}
+		        </if>
+	        </trim>
+	    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rms_house
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jack.rms.model.House" >
+    insert into rms_house (id, h_type, rent_type, 
+      h_name, h_address, h_bedroom_num, 
+      h_livingroom_num, h_washroom_num, h_area, 
+      h_decation, h_direction, h_floor_total, 
+      h_floor, h_no, h_rent, 
+      h_rent_type, h_title, h_content, 
+      h_checkin_date, h_contact, h_phone, 
+      h_lon, h_lat)
+    values (#{id,jdbcType=INTEGER}, #{hType,jdbcType=VARCHAR}, #{rentType,jdbcType=VARCHAR}, 
+      #{hName,jdbcType=VARCHAR}, #{hAddress,jdbcType=VARCHAR}, #{hBedroomNum,jdbcType=INTEGER}, 
+      #{hLivingroomNum,jdbcType=INTEGER}, #{hWashroomNum,jdbcType=INTEGER}, #{hArea,jdbcType=INTEGER}, 
+      #{hDecation,jdbcType=VARCHAR}, #{hDirection,jdbcType=VARCHAR}, #{hFloorTotal,jdbcType=INTEGER}, 
+      #{hFloor,jdbcType=INTEGER}, #{hNo,jdbcType=VARCHAR}, #{hRent,jdbcType=INTEGER}, 
+      #{hRentType,jdbcType=VARCHAR}, #{hTitle,jdbcType=VARCHAR}, #{hContent,jdbcType=VARCHAR}, 
+      #{hCheckinDate,jdbcType=DATE}, #{hContact,jdbcType=VARCHAR}, #{hPhone,jdbcType=VARCHAR}, 
+      #{hLon,jdbcType=DECIMAL}, #{hLat,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jack.rms.model.House" >
+    insert into rms_house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hType != null" >
+        h_type,
+      </if>
+      <if test="rentType != null" >
+        rent_type,
+      </if>
+      <if test="hName != null" >
+        h_name,
+      </if>
+      <if test="hAddress != null" >
+        h_address,
+      </if>
+      <if test="hBedroomNum != null" >
+        h_bedroom_num,
+      </if>
+      <if test="hLivingroomNum != null" >
+        h_livingroom_num,
+      </if>
+      <if test="hWashroomNum != null" >
+        h_washroom_num,
+      </if>
+      <if test="hArea != null" >
+        h_area,
+      </if>
+      <if test="hDecation != null" >
+        h_decation,
+      </if>
+      <if test="hDirection != null" >
+        h_direction,
+      </if>
+      <if test="hFloorTotal != null" >
+        h_floor_total,
+      </if>
+      <if test="hFloor != null" >
+        h_floor,
+      </if>
+      <if test="hNo != null" >
+        h_no,
+      </if>
+      <if test="hRent != null" >
+        h_rent,
+      </if>
+      <if test="hRentType != null" >
+        h_rent_type,
+      </if>
+      <if test="hTitle != null" >
+        h_title,
+      </if>
+      <if test="hContent != null" >
+        h_content,
+      </if>
+      <if test="hCheckinDate != null" >
+        h_checkin_date,
+      </if>
+      <if test="hContact != null" >
+        h_contact,
+      </if>
+      <if test="hPhone != null" >
+        h_phone,
+      </if>
+      <if test="hLon != null" >
+        h_lon,
+      </if>
+      <if test="hLat != null" >
+        h_lat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hType != null" >
+        #{hType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentType != null" >
+        #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="hName != null" >
+        #{hName,jdbcType=VARCHAR},
+      </if>
+      <if test="hAddress != null" >
+        #{hAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="hBedroomNum != null" >
+        #{hBedroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="hLivingroomNum != null" >
+        #{hLivingroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="hWashroomNum != null" >
+        #{hWashroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="hArea != null" >
+        #{hArea,jdbcType=INTEGER},
+      </if>
+      <if test="hDecation != null" >
+        #{hDecation,jdbcType=VARCHAR},
+      </if>
+      <if test="hDirection != null" >
+        #{hDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="hFloorTotal != null" >
+        #{hFloorTotal,jdbcType=INTEGER},
+      </if>
+      <if test="hFloor != null" >
+        #{hFloor,jdbcType=INTEGER},
+      </if>
+      <if test="hNo != null" >
+        #{hNo,jdbcType=VARCHAR},
+      </if>
+      <if test="hRent != null" >
+        #{hRent,jdbcType=INTEGER},
+      </if>
+      <if test="hRentType != null" >
+        #{hRentType,jdbcType=VARCHAR},
+      </if>
+      <if test="hTitle != null" >
+        #{hTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="hContent != null" >
+        #{hContent,jdbcType=VARCHAR},
+      </if>
+      <if test="hCheckinDate != null" >
+        #{hCheckinDate,jdbcType=DATE},
+      </if>
+      <if test="hContact != null" >
+        #{hContact,jdbcType=VARCHAR},
+      </if>
+      <if test="hPhone != null" >
+        #{hPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="hLon != null" >
+        #{hLon,jdbcType=DECIMAL},
+      </if>
+      <if test="hLat != null" >
+        #{hLat,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jack.rms.model.House" >
+    update rms_house
+    <set >
+      <if test="hType != null" >
+        h_type = #{hType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentType != null" >
+        rent_type = #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="hName != null" >
+        h_name = #{hName,jdbcType=VARCHAR},
+      </if>
+      <if test="hAddress != null" >
+        h_address = #{hAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="hBedroomNum != null" >
+        h_bedroom_num = #{hBedroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="hLivingroomNum != null" >
+        h_livingroom_num = #{hLivingroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="hWashroomNum != null" >
+        h_washroom_num = #{hWashroomNum,jdbcType=INTEGER},
+      </if>
+      <if test="hArea != null" >
+        h_area = #{hArea,jdbcType=INTEGER},
+      </if>
+      <if test="hDecation != null" >
+        h_decation = #{hDecation,jdbcType=VARCHAR},
+      </if>
+      <if test="hDirection != null" >
+        h_direction = #{hDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="hFloorTotal != null" >
+        h_floor_total = #{hFloorTotal,jdbcType=INTEGER},
+      </if>
+      <if test="hFloor != null" >
+        h_floor = #{hFloor,jdbcType=INTEGER},
+      </if>
+      <if test="hNo != null" >
+        h_no = #{hNo,jdbcType=VARCHAR},
+      </if>
+      <if test="hRent != null" >
+        h_rent = #{hRent,jdbcType=INTEGER},
+      </if>
+      <if test="hRentType != null" >
+        h_rent_type = #{hRentType,jdbcType=VARCHAR},
+      </if>
+      <if test="hTitle != null" >
+        h_title = #{hTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="hContent != null" >
+        h_content = #{hContent,jdbcType=VARCHAR},
+      </if>
+      <if test="hCheckinDate != null" >
+        h_checkin_date = #{hCheckinDate,jdbcType=DATE},
+      </if>
+      <if test="hContact != null" >
+        h_contact = #{hContact,jdbcType=VARCHAR},
+      </if>
+      <if test="hPhone != null" >
+        h_phone = #{hPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="hLon != null" >
+        h_lon = #{hLon,jdbcType=DECIMAL},
+      </if>
+      <if test="hLat != null" >
+        h_lat = #{hLat,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jack.rms.model.House" >
+    update rms_house
+    set h_type = #{hType,jdbcType=VARCHAR},
+      rent_type = #{rentType,jdbcType=VARCHAR},
+      h_name = #{hName,jdbcType=VARCHAR},
+      h_address = #{hAddress,jdbcType=VARCHAR},
+      h_bedroom_num = #{hBedroomNum,jdbcType=INTEGER},
+      h_livingroom_num = #{hLivingroomNum,jdbcType=INTEGER},
+      h_washroom_num = #{hWashroomNum,jdbcType=INTEGER},
+      h_area = #{hArea,jdbcType=INTEGER},
+      h_decation = #{hDecation,jdbcType=VARCHAR},
+      h_direction = #{hDirection,jdbcType=VARCHAR},
+      h_floor_total = #{hFloorTotal,jdbcType=INTEGER},
+      h_floor = #{hFloor,jdbcType=INTEGER},
+      h_no = #{hNo,jdbcType=VARCHAR},
+      h_rent = #{hRent,jdbcType=INTEGER},
+      h_rent_type = #{hRentType,jdbcType=VARCHAR},
+      h_title = #{hTitle,jdbcType=VARCHAR},
+      h_content = #{hContent,jdbcType=VARCHAR},
+      h_checkin_date = #{hCheckinDate,jdbcType=DATE},
+      h_contact = #{hContact,jdbcType=VARCHAR},
+      h_phone = #{hPhone,jdbcType=VARCHAR},
+      h_lon = #{hLon,jdbcType=DECIMAL},
+      h_lat = #{hLat,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

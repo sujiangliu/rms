@@ -65,6 +65,7 @@
             <mvc:exclude-mapping path="/**/*.css"/>
             <mvc:exclude-mapping path="/**/*.jpg"/>
             <mvc:exclude-mapping path="/**/*.png"/>
+            <mvc:exclude-mapping path="/user/signIn"/>
 <!--             <mvc:exclude-mapping path="/logistics/*.txt"/> -->
 <!--             <mvc:exclude-mapping path="/logistics/*.ico"/> -->
 <!--             <mvc:exclude-mapping path="/logistics/lib/ionic/**/*"/> -->

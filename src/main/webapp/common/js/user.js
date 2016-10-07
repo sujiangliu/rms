@@ -5,9 +5,10 @@ $(function(){
 	getUserList();
 });
 function initBinding(){
-	$("#searchUserBtn").click(function(){alert("todo")});
+	$("#searchUserBtn").click(function(){getUserList()});
 	$("#addUserBtn").click(addUser);
 	$("#submitAddUserBtn").click(submitAddUser);
+	$("#submitMdyUserBtn").click(submitMdyUser);
 }
 function initTree() {
 	$('#userDataGrid').datagrid({   
@@ -24,7 +25,7 @@ function initTree() {
 	});  
 }
 function formatOper(val, row, index){
-	return '<a href="#" onclick="editUser('+row+')">修改</a>&nbsp;<a href="#" onclick="delUser('+row.id+')">删除</a>';
+	return '<a href="#" onclick="editUser('+row.id+','+index+')">修改</a>&nbsp;<a href="#" onclick="delUser('+row.id+')">删除</a>';
 }
 function formatBirthday(value,row,index){
 	var unixTimestamp = new Date(value);  
@@ -67,11 +68,24 @@ function setPage(pageNumber, pageSize) {
 	getUserList();
 }
 
+function getQueryParam() {
+	
+	var user = {};
+	var s_username = $("#searchUsernameTxt").val();
+	if (s_username != '') {
+		user.username = s_username;
+	}
+	var s_mobile = $("#searchMobileTxt").val();
+	if (s_mobile != '') {
+		user.mobile = s_mobile;
+	}
+	return user;
+}
 function getUserList() {
 	if (g_doing) {
 		return;
 	}
-	var data = {};
+	var data = getQueryParam();
 	data.pageNumber = g_pageNumber;
 	data.pageSize = g_pageSize;
 	
@@ -103,8 +117,14 @@ function getUserList() {
 	});
 }
 
-function editUser(user) {
-	$("#editUserWin").panel({'title':'新增用户'}).window("open");
+function editUser(userId, index) {
+	
+	$("#submitAddUserBtn").hide();
+	$("#submitMdyUserBtn").show();
+	
+	var user = $("#userDataGrid").datagrid('getData').rows[index];
+	
+	$("#editUserWin").panel({'title':'修改用户'}).window("open");
 	g_addOrEdit = "edit";
 	
 	$(".userForm input[name='id']").val(user.id);
@@ -113,12 +133,30 @@ function editUser(user) {
 	$(".userForm input[name='nickName']").val(user.nickName);
 	$(".userForm input[name='password']").val();
 	$(".userForm input[name='mobile']").val(user.mobile);
-	$(".userForm input[name='birthday']").val(user.birthday);
+	//$(".userForm input[name='birthday']").val(user.birthday);
+	$("#birthday").datebox('setValue', new Date(user.birthday).format("yyyy-MM-dd"));
 	$(".userForm select[name='sex']").val(user.sex);
 	$(".userForm select[name='roleId']").val(user.roleId);
 }
 function delUser(id) {
-	alert("del" + id);
+	$.messager.confirm('提示','确定要删除该用户',function(r){
+		if (r) {
+			$.ajax({
+				type : "post",
+				data : {'userId': id},
+				url : $("#baseURL").val() + "/user/del",
+				success : function(result) {
+					if ("200" == result) {
+						$("#editUserWin").panel({'title':'新增用户'}).window("close");
+						getUserList();
+					}
+					else {
+						showMessage(result);
+					}
+				}
+			});	
+		}
+	});
 }
 
 g_addOrEdit = "add";
@@ -127,22 +165,17 @@ function addUser(){
 	$("#editUserWin").panel({'title':'新增用户'}).window("open");
 	g_addOrEdit = "add";
 	
-	// $(".userForm input[name='password']")
+	$("#submitAddUserBtn").show();
+	$("#submitMdyUserBtn").hide();
+	
+	$(".userForm input[name='id']").val('');
+	
 }
 
 function submitAddUser() {
 	validForm();
 	
-	var user = {};
-	user.id = $(".userForm input[name='id']").val();
-	user.username = $(".userForm input[name='username']").val();
-	user.trueName = $(".userForm input[name='trueName']").val();
-	user.nickName = $(".userForm input[name='nickName']").val();
-	user.password = $(".userForm input[name='password']").val();
-	user.mobile = $(".userForm input[name='mobile']").val();
-	user.birthday = $(".userForm input[name='birthday']").val();
-	user.sex = $(".userForm select[comboname='sex']").val();
-	user.roleId = $(".userForm select[comboname='roleId']").val();
+	var user = getUser();
 	
 	$.ajax({
 		type : "post",
@@ -158,6 +191,39 @@ function submitAddUser() {
 			}
 		}
 	});
+}
+function submitMdyUser() {
+	validForm();
+	
+	var user = getUser();
+	
+	$.ajax({
+		type : "post",
+		data : user,
+		url : $("#baseURL").val() + "/user/modify",
+		success : function(result) {
+			if ("200" == result) {
+				$("#editUserWin").panel({'title':'修改用户'}).window("close");
+				getUserList();
+			}
+			else {
+				showMessage(result);
+			}
+		}
+	});
+}
+function getUser(){
+	var user = {};
+	user.id = $(".userForm input[name='id']").val();
+	user.username = $(".userForm input[name='username']").val();
+	user.trueName = $(".userForm input[name='trueName']").val();
+	user.nickName = $(".userForm input[name='nickName']").val();
+	user.password = $(".userForm input[name='password']").val();
+	user.mobile = $(".userForm input[name='mobile']").val();
+	user.birthday = $(".userForm input[name='birthday']").val();
+	user.sex = $(".userForm select[comboname='sex']").val();
+	user.roleId = $(".userForm select[comboname='roleId']").val();
+	return user;
 }
 function validForm(){
 	var id = $(".userForm input[name='id']").val();

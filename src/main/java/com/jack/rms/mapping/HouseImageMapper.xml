@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jack.rms.dao.HouseImageMapper" >
+  <resultMap id="BaseResultMap" type="com.jack.rms.model.HouseImage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="h_id" property="hId" jdbcType="INTEGER" />
+    <result column="img_host" property="imgHost" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, h_id, img_host, img_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rms_house_img
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rms_house_img
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jack.rms.model.HouseImage" >
+    insert into rms_house_img (id, h_id, img_host, 
+      img_url)
+    values (#{id,jdbcType=INTEGER}, #{hId,jdbcType=INTEGER}, #{imgHost,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jack.rms.model.HouseImage" >
+    insert into rms_house_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hId != null" >
+        h_id,
+      </if>
+      <if test="imgHost != null" >
+        img_host,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hId != null" >
+        #{hId,jdbcType=INTEGER},
+      </if>
+      <if test="imgHost != null" >
+        #{imgHost,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jack.rms.model.HouseImage" >
+    update rms_house_img
+    <set >
+      <if test="hId != null" >
+        h_id = #{hId,jdbcType=INTEGER},
+      </if>
+      <if test="imgHost != null" >
+        img_host = #{imgHost,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jack.rms.model.HouseImage" >
+    update rms_house_img
+    set h_id = #{hId,jdbcType=INTEGER},
+      img_host = #{imgHost,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

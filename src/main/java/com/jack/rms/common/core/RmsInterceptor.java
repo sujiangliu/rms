@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.jack.rms.model.User;
+
 /**
  * Created by jack on 14-12-29.
  */
@@ -24,6 +26,15 @@ public class RmsInterceptor extends HandlerInterceptorAdapter {
         String logstr = "request url:" + request.getRequestURL() + ", " + request.getMethod() + ", paramMap:" + getRequestMap(request);
         logger.info("http request：url=" + logstr);
 
+        User user = (User) request.getSession().getAttribute("user");
+        if (null == user) {
+        	String url = request.getScheme() + "://" +
+        			request.getServerName() + ":" +
+        			request.getServerPort() + "/" +
+        			request.getContextPath();
+        	response.sendRedirect(url);
+        	return false;
+        }
 //        String verify_code = request.getParameter("logistics_verify_code");
 //        String user_id = request.getParameter("user_id");
 

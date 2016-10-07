@@ -10,5 +10,6 @@
 <script type="text/javascript" src="${baseURL }/common/js/DateUtil.js"></script>
 <script type="text/javascript" src="${baseURL }/common/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="${baseURL }/common/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${baseURL }/common/easyui/locale/easyui-lang-zh_CN.js"></script>
 
 

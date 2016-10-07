@@ -40,6 +40,14 @@ public class UserService implements IUserService {
 		return userMapper.insertSelective(user);
 	}
 	
+	public int updateUser(User user) {
+		return userMapper.updateByPrimaryKeySelective(user);
+	}
+	
+	public int delUser(Integer userId){
+		return userMapper.deleteByPrimaryKey(userId);
+	}
+	
 	public UserMapper getUserMapper() {
 		return userMapper;
 	}
