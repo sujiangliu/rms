@@ -35,7 +35,7 @@ public class UploadController extends BaseController {
 		// 设置内存缓冲区，超过后写入临时文件
 		factory.setSizeThreshold(10240000);
 		// 设置临时文件存储位置
-		String base = "d:/uploadFiles";
+		String base = "/data/apps/img/";
 		File file = new File(base);
 		if (!file.exists()) {
 			file.mkdirs();
