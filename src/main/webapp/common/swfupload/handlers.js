@@ -45,7 +45,7 @@ function fileQueueError(file, errorCode, message) {
  * filestatus : number		// 文件的当前状态，对应的状态代码可查看SWFUpload.FILE_STATUS }
  */
 function fileQueued(file){
-	addReadyFileInfo(file.id,file.name,"成功加载到上传队列");
+	addReadyFileInfo(file.id,file.name,"");
 }
 function fileDialogComplete(numFilesSelected, numFilesQueued) {
 	try {
@@ -81,6 +81,11 @@ function uploadSuccess(file, serverData) {
 	try {
 		var progress = new FileProgress(file,  this.customSettings.upload_target);
 		addFileInfo(file.id,"文件上传完成");
+		
+		var imgsrc = document.getElementById("houseImgSrc").value;
+		imgsrc += ";" + serverData;
+		document.getElementById("houseImgSrc").value = imgsrc;
+		
 	} catch (ex) {
 		this.debug(ex);
 	}
@@ -88,7 +93,7 @@ function uploadSuccess(file, serverData) {
 
 function addFileInfo(fileId,message){
 	var row = document.getElementById(fileId);
-	row.cells[2].innerHTML = "<font color='green'>"+message+"</font>";
+	row.cells[2].innerHTML = "&nbsp;<font color='green'>"+message+"</font>&nbsp;";
 }
 function addReadyFileInfo(fileid,fileName,message,status){
 	//用表格显示
@@ -100,7 +105,7 @@ function addReadyFileInfo(fileid,fileName,message,status){
 	var col3 = row.insertCell();
 	var col4 = row.insertCell();
 	col4.align = "right";
-	col1.innerHTML = message+" : ";
+	// col1.innerHTML = message+" : ";
 	col2.innerHTML = fileName;
 	if(status!=null&&status!=""){
 		col3.innerHTML="<font color='red'>"+status+"</font>";
@@ -145,7 +150,7 @@ function uploadComplete(file) {
 		} else {
 			var progress = new FileProgress(file,  this.customSettings.upload_target);
 			progress.setComplete();
-			progress.setStatus("<font color='red'>所有文件上传完毕!</b></font>");
+			progress.setStatus("<font color='green'>所有文件上传完毕!</b></font>");
 			progress.toggleCancel(false);
 		}
 	} catch (ex) {
@@ -252,8 +257,11 @@ function fadeIn(element, opacity) {
  *	FileProgress Object
  *	Control object for displaying file info
  * ****************************************** */
-
+var isSuccess = true;
 function FileProgress(file, targetID) {
+	if (isSuccess) {
+		return;
+	}
 	this.fileProgressID = "divFileProgress";
 
 	this.fileProgressWrapper = document.getElementById(this.fileProgressID);
@@ -288,7 +296,7 @@ function FileProgress(file, targetID) {
 		this.fileProgressElement.appendChild(progressBar);
 
 		this.fileProgressWrapper.appendChild(this.fileProgressElement);
-		document.getElementById(targetID).style.height = "75px";
+		// document.getElementById(targetID).style.height = "75px";
 		document.getElementById(targetID).appendChild(this.fileProgressWrapper);
 		fadeIn(this.fileProgressWrapper, 0);
 

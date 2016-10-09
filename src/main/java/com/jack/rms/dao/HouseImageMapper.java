@@ -4,6 +4,8 @@ import com.jack.rms.model.HouseImage;
 
 public interface HouseImageMapper {
     int deleteByPrimaryKey(Integer id);
+    
+    int deleteByHouseId(Integer houseId);
 
     int insert(HouseImage record);
 

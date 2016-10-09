@@ -330,6 +330,21 @@ function getHouse(){
 		}
 	});
 	house.supportingFacilities = supportingFacilities;
+	
+	var houseImages = [];
+	var houseImgSrc = $("#houseImgSrc").val();
+	var srcs = houseImgSrc.split(";");
+	for (var m = 0; m < srcs.length; m++) {
+		var src = srcs[m];
+		if (null == src || "" == src) {
+			continue;
+		}
+		var houseImage =  {};
+		houseImage.imgUrl = src;
+		houseImages[houseImages.length] = houseImage;
+	}
+	house.houseImages = houseImages;
+	
 	console.log(house);
 	
 	return house;

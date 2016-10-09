@@ -20,6 +20,10 @@
     delete from rms_house_img
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByHouseId" parameterType="java.lang.Integer" >
+    delete from rms_house_img
+    where h_id = #{houseId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.jack.rms.model.HouseImage" >
     insert into rms_house_img (id, h_id, img_host, 
       img_url)

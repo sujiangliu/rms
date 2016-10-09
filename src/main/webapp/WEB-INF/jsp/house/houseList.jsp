@@ -32,7 +32,7 @@
 				<table id="houseDataGrid"></table>
 				<div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
 				
-				<div id="editHouseWin" class="easyui-window" title="房屋信息" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:450px;height:600px;padding:10px;">
+				<div id="editHouseWin" class="easyui-window" title="房屋信息" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:600px;height:650px;padding:10px;">
 					<form class="houseForm">
 						<input type="hidden" name="id" />
 						<span class="column_form">
@@ -126,6 +126,28 @@
 								纬度：<input name="hLat" type="text" class="easyui-validatebox" data-options="required:true" style="width:40px;height:32px"/>
 							</span>
 						</span>
+						<span class="column_form">
+							<label>上传图片</label>
+							<span>
+								<input type="hidden" id="houseImgSrc" name="houseImgSrc" /> 
+								<form>
+									<div style="display: inline; border: solid 1px #7FAAFF;padding: 2px;">
+										<span id="spanButtonPlaceholder"></span>
+										<input id="btnUpload" type="button" value="上  传"
+											onclick="startUploadFile();" class="btn3_mouseout" 
+											/>
+										<input id="btnCancel" type="button" value="取消所有上传"
+											onclick="cancelUpload();" disabled="disabled" class="btn3_mouseout" 
+											/>
+									</div>
+								</form>
+								<div id="divFileProgressContainer"></div>
+								<div id="thumbnails">
+									<table id="infoTable" border="0" width="400" style="display: inline; padding: 2px;margin-top:8px;">
+									</table>
+								</div>
+							</span>
+						</span>
 						<a id="submitAddHouseBtn" href="#" class="easyui-linkbutton" >新增</a>
 						<a id="submitMdyHouseBtn" href="#" class="easyui-linkbutton" >修改</a>
 					</form>
@@ -142,3 +164,51 @@
 	</script>
 	<script src="${baseURL}/common/js/menu.js"></script>
 	<script src="${baseURL}/common/js/house.js"></script>
+	
+	<script type="text/javascript" src="${baseURL}/common/swfupload/swfupload.js"></script>
+	<script type="text/javascript" src="${baseURL}/common/swfupload/swfupload.queue.js"></script>
+	<script type="text/javascript" src="${baseURL}/common/swfupload/handlers.js"></script>
+	
+	<script type="text/javascript">
+		var swfu;
+		window.onload = function () {
+			swfu = new SWFUpload({
+				upload_url: "${baseURL}/upload",
+				post_params: {"name" : "zwm"},
+				use_query_string:true,
+				// File Upload Settings
+				file_size_limit : "1 MB",	// 文件大小控制
+				file_types : "*.jpg;*.png;*.gif",
+				file_types_description : "All Files",
+				file_upload_limit : "0",
+								
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,//选择好文件后提交
+				file_queued_handler : fileQueued,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+				button_placeholder_id : "spanButtonPlaceholder",
+				button_width: 100,
+				button_height: 18,
+				button_text : '<span class="button">请选择文件 </span>',
+				button_text_style : '.button { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; } .buttonSmall { font-size: 10pt; }',
+				button_text_top_padding: 0,
+				button_text_left_padding: 18,
+				button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+				button_cursor: SWFUpload.CURSOR.HAND,
+				// Flash Settings
+				flash_url : "${baseURL}/common/swfupload/swfupload.swf",
+				custom_settings : {
+					upload_target : "divFileProgressContainer"
+				},
+				// Debug Settings
+				debug: false  //是否显示调试窗口
+			});
+		};
+		function startUploadFile(){
+			swfu.startUpload();
+		}
+		
+	</script>

@@ -48,6 +48,7 @@ public class UploadController extends BaseController {
 		upload.setSizeMax(10002400000l);
 		upload.setHeaderEncoding("UTF-8");
 
+		String fileNames = "";
 		try {
 			MultipartHttpServletRequest mrequest = (MultipartHttpServletRequest) request;
 			Map<String, MultipartFile> fileMap = mrequest.getFileMap();
@@ -57,18 +58,18 @@ public class UploadController extends BaseController {
 				Map.Entry<String, MultipartFile> entry = it.next();
 				MultipartFile mFile = entry.getValue();
 				if (mFile.getSize() != 0 && !"".equals(mFile.getName())) {
-					File dest = new File(base + File.separator + mFile.getOriginalFilename());
+					String originalFilename = mFile.getOriginalFilename();
+					String tFileName = System.currentTimeMillis() + originalFilename.substring(originalFilename.lastIndexOf("."));
+					
+					File dest = new File(base + File.separator + tFileName);
 					mFile.transferTo(dest);
+					fileNames += tFileName;
 				}
 			}
+			
+			response.getWriter().write(fileNames);
+			
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			response.getWriter().write("aaa111");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
