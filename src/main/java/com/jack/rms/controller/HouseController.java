@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jack.rms.common.core.BaseController;
 import com.jack.rms.model.House;
 import com.jack.rms.model.PageResponse;
+import com.jack.rms.model.SupportingFacility;
 import com.jack.rms.model.request.HouseQueryParam;
 import com.jack.rms.service.IHouseService;
+import com.jack.rms.service.ISupportingFacilityService;
 
 @Controller
 @RequestMapping("/house")
@@ -19,6 +22,9 @@ public class HouseController extends BaseController {
 	
 	@Autowired
 	private IHouseService houseService; 
+	
+	@Autowired
+	private ISupportingFacilityService supportingFacilityService;
 
 	@RequestMapping("/housePage")
 	public String housePage() {
@@ -40,6 +46,15 @@ public class HouseController extends BaseController {
 		int total = houseService.countHousesByPage(houseQueryParam);
 		List<House> houses = houseService.getHousesByPage(houseQueryParam);
 		
+		for (House house : houses) {
+			List<SupportingFacility> supportingFacilities = supportingFacilityService.getSupportingFacilitysByHouseId(house.getId());
+			house.setSupportingFacilities(supportingFacilities);
+
+			// TODO
+//			List<HouseImage> houseImages = null;
+//			house.setHouseImages(houseImages);
+		}
+		
 		PageResponse pageResponse = new PageResponse();
 		pageResponse.setTotal(total);
 		pageResponse.setPageNumber(houseQueryParam.getPageNumber());
@@ -50,13 +65,14 @@ public class HouseController extends BaseController {
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public String add(House house) {
+	public String add(@RequestBody House house) {
 		
 		if (null == house) {
 			return "房屋信息不正确";
 		}
 		
 		int i = houseService.saveHouse(house);
+		
 		if (i < 1) {
 			return "新增失败";
 		}
@@ -64,7 +80,7 @@ public class HouseController extends BaseController {
 	}
 	@RequestMapping("/modify")
 	@ResponseBody
-	public String modify(House house) {
+	public String modify(@RequestBody House house) {
 		
 		if (null == house) {
 			return "房屋信息不正确";

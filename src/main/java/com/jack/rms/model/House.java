@@ -1,6 +1,7 @@
 package com.jack.rms.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -51,6 +52,10 @@ public class House {
     private Long hLon;
 
     private Long hLat;
+    
+    private List<HouseImage> houseImages;
+    
+    private List<SupportingFacility> supportingFacilities;
 
     public Integer getId() {
         return id;
@@ -235,4 +240,20 @@ public class House {
     public void sethLat(Long hLat) {
         this.hLat = hLat;
     }
+
+	public List<HouseImage> getHouseImages() {
+		return houseImages;
+	}
+
+	public void setHouseImages(List<HouseImage> houseImages) {
+		this.houseImages = houseImages;
+	}
+
+	public List<SupportingFacility> getSupportingFacilities() {
+		return supportingFacilities;
+	}
+
+	public void setSupportingFacilities(List<SupportingFacility> supportingFacilities) {
+		this.supportingFacilities = supportingFacilities;
+	}
 }

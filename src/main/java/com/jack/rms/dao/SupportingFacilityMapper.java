@@ -1,9 +1,13 @@
 package com.jack.rms.dao;
 
+import java.util.List;
+
 import com.jack.rms.model.SupportingFacility;
 
 public interface SupportingFacilityMapper {
     int deleteByPrimaryKey(Integer id);
+    
+    int deleteByHouseId(Integer houseId);
 
     int insert(SupportingFacility record);
 
@@ -14,4 +18,6 @@ public interface SupportingFacilityMapper {
     int updateByPrimaryKeySelective(SupportingFacility record);
 
     int updateByPrimaryKey(SupportingFacility record);
+    
+    List<SupportingFacility> selectSupportingFacilitysByHouseId(Integer houseId);
 }

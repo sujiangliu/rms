@@ -92,7 +92,7 @@
 							<label>租金</label>
 							<span>
 								<input id="hRent" name="hRent" class="easyui-validatebox" data-options="required:true" style="width:40px;height:32px;"/>元/
-								<input id="hRentType" name="hRentType" class="easyui-validatebox" data-options="required:true" style="width:100px;height:32px;"/>
+								<input id="hRentType" name="hRentType" class="easyui-combobox" data-options="required:true" style="width:100px;height:32px;"/>
 							</span>
 						</span>
 						<span class="column_form">
@@ -102,6 +102,10 @@
 						<span class="column_form">
 							<label>房源描述</label>
 							<span><input name="hContent" type="text" class="easyui-validatebox" data-options="required:true" style="width:200px;height:32px"/></span>
+						</span>
+						<span class="column_form">
+							<label>配套设施</label>
+							<span id="supportingFacilitySpan" style="width:300px;line-height:25px;"></span>
 						</span>
 						<span class="column_form">
 							<label>入住时间</label>

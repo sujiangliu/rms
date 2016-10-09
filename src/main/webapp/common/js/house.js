@@ -12,14 +12,15 @@ function initBinding(){
 	$("#submitMdyHouseBtn").click(submitMdyHouse);
 }
 function initData() {
-	queryDomainData("房源类型", "#hType");
-	queryDomainData("出租方式", "#rentType");
-	queryDomainData("装修程度", "#hDecation");
-	queryDomainData("朝向", "#hDirection");
+	queryDomainData("房源类型", "#hType", loadSelectData);
+	queryDomainData("出租方式", "#rentType", loadSelectData);
+	queryDomainData("装修程度", "#hDecation", loadSelectData);
+	queryDomainData("朝向", "#hDirection", loadSelectData);
+	queryDomainData("配套设施", "#supportingFacilitySpan", loadSupportingFacilityData);
 	queryDomainData("付款方式", "#hRentType");
 }
 
-function queryDomainData(dType, idVal) {
+function queryDomainData(dType, idVal, callback) {
 	var data = {};
 	data.dType = dType;
 	data.pageNumber = 1;
@@ -31,17 +32,30 @@ function queryDomainData(dType, idVal) {
 		success : function(result) {
 			console.log(JSON.stringify(result));
 			if (null != result) {
-				
-				$(idVal).combobox({
-					valueField : "dValue",
-					textField : "dName",
-					data: result.results
-				});
+				callback(idVal, result.results);
+//				$(idVal).combobox({
+//					valueField : "dValue",
+//					textField : "dName",
+//					data: result.results
+//				});
 			}
 		}
 	});
 }
-
+function loadSelectData(idVal, data) {
+	$(idVal).combobox({
+		valueField : "dValue",
+		textField : "dName",
+		data: data
+	});
+}
+function loadSupportingFacilityData(idVal, data) {
+	var html = "";
+	for (var i = 0; i < data.length; i++) {
+		html += "<input type='checkbox' id='h_sf_"+data[i].dValue+"' name='supportingFacility' value='"+data[i].dValue+"' />" + data[i].dName + "&nbsp;";
+	}
+	$(idVal).html(html);
+}
 function initTree() {
 	$('#houseDataGrid').datagrid({   
 	    columns:[[
@@ -179,6 +193,18 @@ function editHouse(houseId, index) {
 	$(".houseForm input[name='hPhone']").val(house.hPhone);
 	$(".houseForm input[name='hLon']").val(house.hLon);
 	$(".houseForm input[name='hLat']").val(house.hLat);
+	
+	var eles =document.getElementsByName("supportingFacility");
+	
+	for (var m = 0; m < eles.length; m++) {
+		eles[m].checked = false;
+	}
+	
+	for (var i = 0; i < house.supportingFacilities.length; i++) {
+		var cid = 'h_sf_' + house.supportingFacilities[i].sfId;
+		document.getElementById(cid).checked = true;
+	}
+	
 }
 function delHouse(id) {
 	$.messager.confirm('提示','确定要删除该房屋',function(r){
@@ -225,7 +251,9 @@ function submitAddHouse() {
 	
 	$.ajax({
 		type : "post",
-		data : house,
+		data : JSON.stringify(house),
+		dataType: "json",
+		contentType: "application/json",
 		url : $("#baseURL").val() + "/house/add",
 		success : function(result) {
 			if ("200" == result) {
@@ -249,7 +277,9 @@ function submitMdyHouse() {
 	
 	$.ajax({
 		type : "post",
-		data : house,
+		data : JSON.stringify(house),
+		dataType: "json",
+		contentType: "application/json",
 		url : $("#baseURL").val() + "/house/modify",
 		success : function(result) {
 			if ("200" == result) {
@@ -264,7 +294,8 @@ function submitMdyHouse() {
 }
 function getHouse(){
 	var house = {};
-	house.id = $(".houseForm input[name='id']").val();
+	var houseid = $(".houseForm input[name='id']").val();
+	house.id = houseid;
 	house.hType = $("#hType").combobox('getValue');
 	house.rentType = $("#rentType").combobox('getValue');
 	house.hName = $(".houseForm input[name='hName']").val();
@@ -288,6 +319,17 @@ function getHouse(){
 	house.hLon = $(".houseForm input[name='hLon']").val();
 	house.hLat = $(".houseForm input[name='hLat']").val();
 	
+	var supportingFacilities = [];
+	$("#supportingFacilitySpan input").each(function(){
+		if ($(this)[0].checked) {
+			var sf = {};
+			sf.id = null;
+			sf.hId = null;
+			sf.sfId = $(this).val();
+			supportingFacilities[supportingFacilities.length] = sf;
+		}
+	});
+	house.supportingFacilities = supportingFacilities;
 	console.log(house);
 	
 	return house;

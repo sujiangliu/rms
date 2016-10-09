@@ -105,7 +105,7 @@
       #{hCheckinDate,jdbcType=DATE}, #{hContact,jdbcType=VARCHAR}, #{hPhone,jdbcType=VARCHAR}, 
       #{hLon,jdbcType=DECIMAL}, #{hLat,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.jack.rms.model.House" >
+  <insert id="insertSelective" parameterType="com.jack.rms.model.House" useGeneratedKeys="true" keyProperty="id">
     insert into rms_house
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

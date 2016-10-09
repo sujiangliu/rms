@@ -2,20 +2,28 @@ package com.jack.rms.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jack.rms.common.SpringContextUtil;
 import com.jack.rms.dao.HouseMapper;
+import com.jack.rms.dao.SupportingFacilityMapper;
 import com.jack.rms.model.House;
+import com.jack.rms.model.SupportingFacility;
 import com.jack.rms.model.request.HouseQueryParam;
 import com.jack.rms.service.IHouseService;
 
 @Service
+@Transactional
 public class HouseService implements IHouseService {
 	
 	@Autowired
 	private HouseMapper houseMapper;
+	
+	@Autowired
+	private SupportingFacilityMapper supportingFacilityMapper;
 	
 	public House getHouseById(int id) {
 		House house = houseMapper.selectByPrimaryKey(id);
@@ -23,15 +31,24 @@ public class HouseService implements IHouseService {
 	}
 	
 	public int saveHouse(House house) {
-		
-		if (null == houseMapper) {
-			houseMapper = SpringContextUtil.getBean("houseMapper");
+		int r = houseMapper.insertSelective(house);
+		List<SupportingFacility> supportingFacilities = house.getSupportingFacilities();
+		for (SupportingFacility sf : supportingFacilities) {
+			sf.sethId(house.getId());
+			supportingFacilityMapper.insert(sf);
 		}
-		
-		return houseMapper.insertSelective(house);
+		return r;
 	}
 	
 	public int updateHouse(House house) {
+		
+		supportingFacilityMapper.deleteByHouseId(house.getId());
+		List<SupportingFacility> supportingFacilities = house.getSupportingFacilities();
+		for (SupportingFacility sf : supportingFacilities) {
+			sf.sethId(house.getId());
+			supportingFacilityMapper.insert(sf);
+		}
+		
 		return houseMapper.updateByPrimaryKeySelective(house);
 	}
 	

@@ -15,9 +15,19 @@
     from rms_supporting_facility
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectSupportingFacilitysByHouseId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rms_supporting_facility
+    where h_id = #{houseId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from rms_supporting_facility
     where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByHouseId" parameterType="java.lang.Integer" >
+    delete from rms_supporting_facility
+    where h_id = #{houseId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jack.rms.model.SupportingFacility" >
     insert into rms_supporting_facility (id, h_id, sf_id
