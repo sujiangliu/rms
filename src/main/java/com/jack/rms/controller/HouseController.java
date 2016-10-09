@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jack.rms.common.core.BaseController;
 import com.jack.rms.model.House;
+import com.jack.rms.model.HouseImage;
 import com.jack.rms.model.PageResponse;
 import com.jack.rms.model.SupportingFacility;
 import com.jack.rms.model.request.HouseQueryParam;
+import com.jack.rms.service.IHouseImageService;
 import com.jack.rms.service.IHouseService;
 import com.jack.rms.service.ISupportingFacilityService;
 
@@ -25,6 +27,9 @@ public class HouseController extends BaseController {
 	
 	@Autowired
 	private ISupportingFacilityService supportingFacilityService;
+	
+	@Autowired
+	private IHouseImageService houseImageService;
 
 	@RequestMapping("/housePage")
 	public String housePage() {
@@ -50,9 +55,8 @@ public class HouseController extends BaseController {
 			List<SupportingFacility> supportingFacilities = supportingFacilityService.getSupportingFacilitysByHouseId(house.getId());
 			house.setSupportingFacilities(supportingFacilities);
 
-			// TODO
-//			List<HouseImage> houseImages = null;
-//			house.setHouseImages(houseImages);
+			List<HouseImage> houseImages = houseImageService.getHouseImagesByHouseId(house.getId());
+			house.setHouseImages(houseImages);
 		}
 		
 		PageResponse pageResponse = new PageResponse();

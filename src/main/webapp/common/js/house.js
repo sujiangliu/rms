@@ -205,6 +205,13 @@ function editHouse(houseId, index) {
 		document.getElementById(cid).checked = true;
 	}
 	
+	var houseImages = house.houseImages;
+	var houseImgSrc = "";
+	for(var i = 0; i < houseImages.length; i++) {
+		houseImgSrc += ";" + houseImages[i].imgUrl;
+	}
+	
+	$("#houseImgSrc").val(houseImgSrc);
 }
 function delHouse(id) {
 	$.messager.confirm('提示','确定要删除该房屋',function(r){

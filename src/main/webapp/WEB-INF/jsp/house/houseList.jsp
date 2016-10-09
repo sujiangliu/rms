@@ -129,7 +129,7 @@
 						<span class="column_form">
 							<label>上传图片</label>
 							<span>
-								<input type="hidden" id="houseImgSrc" name="houseImgSrc" /> 
+								<input type="text" id="houseImgSrc" name="houseImgSrc" /> 
 								<form>
 									<div style="display: inline; border: solid 1px #7FAAFF;padding: 2px;">
 										<span id="spanButtonPlaceholder"></span>

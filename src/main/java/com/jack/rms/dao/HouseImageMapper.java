@@ -1,5 +1,7 @@
 package com.jack.rms.dao;
 
+import java.util.List;
+
 import com.jack.rms.model.HouseImage;
 
 public interface HouseImageMapper {
@@ -12,6 +14,8 @@ public interface HouseImageMapper {
     int insertSelective(HouseImage record);
 
     HouseImage selectByPrimaryKey(Integer id);
+    
+    List<HouseImage> selectByHouseId(Integer houseId);
 
     int updateByPrimaryKeySelective(HouseImage record);
 
